@@ -1,3 +1,6 @@
+using HR.EmployeeDepartment.BLL.Interfaces;
+using HR.EmployeeDepartment.DAL.Data.DbContexts;
+
 namespace HR.EmployeeDepartment.PL
 {
     public class Program
@@ -8,6 +11,9 @@ namespace HR.EmployeeDepartment.PL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<AppDbContext>();
+            builder.Services.AddScoped<IDepartmentRepository, Departmentrepo>();
 
             var app = builder.Build();
 
