@@ -1,14 +1,18 @@
 ﻿@{
     ViewData["Title"] = "Departments Page";
 }
+@* @model Department *@
 
 <div class="text-center">
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
+                <th scope="col">Code</th>
+                <th scope="col">Name</th>
+                <th scope="col">View</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -16,15 +20,9 @@
                 <th scope="row">1</th>
                 <td>Mark</td>
                 <td>Otto</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
+                <td><a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Get" asp-route-id="1">Departments</a></td>
+                <td>Otto</td>
+                <td>Otto</td>
             </tr>
         </tbody>
     </table>

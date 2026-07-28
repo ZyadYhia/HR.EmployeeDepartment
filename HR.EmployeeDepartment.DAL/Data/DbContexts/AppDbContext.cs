@@ -11,10 +11,14 @@ namespace HR.EmployeeDepartment.DAL.Data.DbContexts
 {
     public class AppDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt)
         {
-            optionsBuilder.UseSqlServer("Server = .; Database = HR; Trusted_Connection = True' TruseServerCertificate = True;");
+            
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server = .; Database = HR; Trusted_Connection = True' TruseServerCertificate = True;");
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

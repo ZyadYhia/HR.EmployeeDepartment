@@ -1,5 +1,7 @@
 using HR.EmployeeDepartment.BLL.Interfaces;
+using HR.EmployeeDepartment.BLL.Repositories;
 using HR.EmployeeDepartment.DAL.Data.DbContexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace HR.EmployeeDepartment.PL
 {
@@ -12,8 +14,10 @@ namespace HR.EmployeeDepartment.PL
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<AppDbContext>();
-            builder.Services.AddScoped<IDepartmentRepository, Departmentrepo>();
+            builder.Services.AddDbContext<AppDbContext>(opt => { 
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
+            });
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
             var app = builder.Build();
 

@@ -12,7 +12,7 @@ public class DepartmentController : Controller
     }
     public IActionResult Index()
     {
-        var deps = _departmentReposatory.GetAll();
-        return View();
+        var departments = _departmentReposatory.GetAll();
+        return View(departments);
     }
 }
