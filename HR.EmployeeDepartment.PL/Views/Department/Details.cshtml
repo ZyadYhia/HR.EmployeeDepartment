@@ -17,7 +17,7 @@
         <input asp-for="CreatedAt" class="form-control" readonly />
     </div>
     <div class="mt-4">
-        <a class="btn btn-warning" asp-controller="Department" asp-action="Edit">Edit</a>
+        <a class="btn btn-warning" asp-controller="Department" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
         <a class="btn btn-secondary" asp-controller="Department" asp-action="Index">Cancel</a>
     </div>
 </div>
