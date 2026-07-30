@@ -23,6 +23,7 @@
                         <th>@Html.DisplayNameFor(m => m.First().Salary)</th>
                         <th>@Html.DisplayNameFor(m => m.First().IsActive)</th>
                         <th>@Html.DisplayNameFor(m => m.First().HiringDate)</th>
+                        <th>@Html.DisplayNameFor(m => m.First().Department.Name)</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                             <td>@item.Salary.ToString("C")</td>
                             <td>@(item.IsActive ? "Active" : "Inactive")</td>
                             <td>@item.HiringDate.ToString("d")</td>
+                            <td>@item.Department?.Name ?? "-"</td>
                             <td>
                                 <a class="btn btn-warning btn-sm" asp-controller="Employee" asp-action="Details" asp-route-id="@item.Id">Details</a>
                                 <a class="btn btn-success btn-sm" asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id">Edit</a>

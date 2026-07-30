@@ -17,6 +17,8 @@ namespace HR.EmployeeDepartment.DAL.Models
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime HiringDate { get; set; }
+        public int? DepartmentId { get; set; }
+        public Department Department { get; set; }
 
     }
 }

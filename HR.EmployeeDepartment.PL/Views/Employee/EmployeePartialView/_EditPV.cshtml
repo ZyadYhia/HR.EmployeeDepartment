@@ -1,5 +1,7 @@
 @model Employee
-
+@{
+    var Departments = new SelectList(ViewData["departments"] as IEnumerable<Department>, "Id", "Name");
+}
 <input asp-for="Id" type="hidden" />
 
 <div class="form-group mb-3">
@@ -53,6 +55,12 @@
     <label asp-for="CreatedAt" class="form-label"></label>
     <input asp-for="CreatedAt" type="datetime-local" class="form-control" />
     <span asp-validation-for="CreatedAt" class="text-danger"></span>
+</div>
+<div class="form-group mb-3">
+    <label asp-for="DepartmentId" class="form-label"></label>
+    <select asp-for="DepartmentId" class="form-select" asp-items="Departments">
+        <option value="">-- Select Department --</option>
+    </select>
 </div>
 
 <input asp-for="IsDeleted" type="hidden" value="false" />
