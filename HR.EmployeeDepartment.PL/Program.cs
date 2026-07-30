@@ -1,6 +1,7 @@
 ﻿using HR.EmployeeDepartment.BLL.Interfaces;
 using HR.EmployeeDepartment.BLL.Repositories;
 using HR.EmployeeDepartment.DAL.Data.DbContexts;
+using HR.EmployeeDepartment.PL.MappingProfiles;
 using Microsoft.EntityFrameworkCore;
 
 namespace HR.EmployeeDepartment.PL
@@ -19,6 +20,9 @@ namespace HR.EmployeeDepartment.PL
             });
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+            builder.Services.AddAutoMapper(M => M.AddProfile(new EmployeeProfile()));
+            builder.Services.AddAutoMapper(M => M.AddProfile(new DepartmentProfile()));
 
             var app = builder.Build();
 

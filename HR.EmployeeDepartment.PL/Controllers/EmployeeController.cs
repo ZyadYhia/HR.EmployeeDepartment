@@ -5,17 +5,21 @@ using HR.EmployeeDepartment.BLL.Interfaces;
 using HR.EmployeeDepartment.DAL.Models;
 using HR.EmployeeDepartment.PL.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 
 namespace HR.EmployeeDepartment.PL.Controllers;
 public class EmployeeController : Controller
 {
     private readonly IEmployeeRepository _employeeRepository;
     private readonly IDepartmentRepository _departmentRepository;
+    private readonly IMapper _mapper;
 
-    public EmployeeController(IEmployeeRepository employeeRepository, IDepartmentRepository departmentRepository)
+    public EmployeeController(IEmployeeRepository employeeRepository, IDepartmentRepository departmentRepository, IMapper mapper
+        )
     {
         _employeeRepository = employeeRepository;
         _departmentRepository = departmentRepository;
+        _mapper = mapper;
     }
 
     public async Task<IActionResult> Index()
@@ -62,20 +66,21 @@ public class EmployeeController : Controller
     {
         if (ModelState.IsValid)
         {
-            var employee = new Employee()
-            {
-                Name = model.Name,
-                Age = model.Age,
-                Email = model.Email,
-                Address = model.Address,
-                Phone = model.Phone,
-                Salary = model.Salary,
-                IsActive = model.IsActive,
-                IsDeleted = model.IsDeleted,
-                HiringDate = model.HiringDate,
-                DepartmentId = model.DepartmentId,
-                CreatedAt = model.CreatedAt
-            };
+            var employee = _mapper.Map<Employee>(model);
+            //var employee = new Employee()
+            //{
+            //    Name = model.Name,
+            //    Age = model.Age,
+            //    Email = model.Email,
+            //    Address = model.Address,
+            //    Phone = model.Phone,
+            //    Salary = model.Salary,
+            //    IsActive = model.IsActive,
+            //    IsDeleted = model.IsDeleted,
+            //    HiringDate = model.HiringDate,
+            //    DepartmentId = model.DepartmentId,
+            //    CreatedAt = model.CreatedAt
+            //};
             var res = await _employeeRepository.Add(employee);
             if (res > 0)
                 return RedirectToAction(nameof(Index));
