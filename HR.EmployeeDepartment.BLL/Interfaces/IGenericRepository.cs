@@ -10,7 +10,7 @@ public interface IGenericRepository<T> where T : BaseModel
 {
     Task<IEnumerable<T>> GetAll();
     Task<T> Get(int id);
-    Task<int> Add(T model);
-    Task<int> Update(T model);
-    Task<int> Delete(T model);
+    Task Add(T model);
+    Task Update(T model);
+    Task Delete(T model);
 }

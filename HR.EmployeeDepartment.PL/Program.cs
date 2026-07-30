@@ -18,8 +18,8 @@ namespace HR.EmployeeDepartment.PL
             builder.Services.AddDbContext<AppDbContext>(opt => { 
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
             });
-            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddAutoMapper(M => M.AddProfile(new EmployeeProfile()));
             builder.Services.AddAutoMapper(M => M.AddProfile(new DepartmentProfile()));

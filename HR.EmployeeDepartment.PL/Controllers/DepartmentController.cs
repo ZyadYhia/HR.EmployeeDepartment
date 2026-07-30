@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 namespace HR.EmployeeDepartment.PL.Controllers;
 public class DepartmentController : Controller
 {
-    private readonly IDepartmentRepository _departmentReposatory;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DepartmentController(IDepartmentRepository departmentReposatory)
+    public DepartmentController(IUnitOfWork unitOfWork)
     {
-        _departmentReposatory = departmentReposatory;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<IActionResult> Index()
     {
-        var departments = await _departmentReposatory.GetAll();
+        var departments = await _unitOfWork.DepartmentRepository.GetAll();
         return View(departments);
     }
 
     public async Task<IActionResult> Details(int? id, string viewName = "Details")
     {
         if (id is null) return BadRequest(new { statusCode = 400, message = "Id is required" });
-        var dpt = await _departmentReposatory.Get(id.Value);
+        var dpt = await _unitOfWork.DepartmentRepository.Get(id.Value);
         if (dpt == null)
             return NotFound(new { statusCode = 404, message = $"Department with Id:{id} not found" });
         return View(viewName, dpt);
@@ -45,7 +45,8 @@ public class DepartmentController : Controller
                 Name = model.Name,
                 CreatedAt = model.CreatedAt
             };
-            var res = await _departmentReposatory.Add(dpt);
+            await _unitOfWork.DepartmentRepository.Add(dpt);
+            var res = await _unitOfWork.Complete();
             if (res > 0)
                 return RedirectToAction(nameof(Index));
 
@@ -62,7 +63,9 @@ public class DepartmentController : Controller
     {
         if (ModelState.IsValid)
         {
-            var res = await _departmentReposatory.Update(model);
+            await _unitOfWork.DepartmentRepository.Update(model);
+
+            var res = await _unitOfWork.Complete();
             if (res > 0)
                 return RedirectToAction(nameof(Index));
 
@@ -77,7 +80,9 @@ public class DepartmentController : Controller
     {
         if (ModelState.IsValid)
         {
-            var res = await _departmentReposatory.Delete(model);
+            await _unitOfWork.DepartmentRepository.Delete(model);
+
+            var res = await _unitOfWork.Complete();
             if (res > 0)
                 return RedirectToAction(nameof(Index));
 
