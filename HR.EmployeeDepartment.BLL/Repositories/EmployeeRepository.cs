@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace HR.EmployeeDepartment.BLL.Repositories
 {
-    public class DepartmentRepository :GenericRepository<Department>, IDepartmentRepository
+    public class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
     {
 
-        public DepartmentRepository(AppDbContext ctx) : base(ctx)
+        public EmployeeRepository(AppDbContext ctx): base(ctx)
         {
-
+            
         }
+
     }
 }

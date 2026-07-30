@@ -1,4 +1,4 @@
-using HR.EmployeeDepartment.BLL.Interfaces;
+﻿using HR.EmployeeDepartment.BLL.Interfaces;
 using HR.EmployeeDepartment.BLL.Repositories;
 using HR.EmployeeDepartment.DAL.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +18,7 @@ namespace HR.EmployeeDepartment.PL
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
             });
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             var app = builder.Build();
 
